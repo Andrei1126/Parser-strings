@@ -1,0 +1,31 @@
+Micut Andrei-Ion
+Grupa 331CB
+
+							Parser siruri de caractere
+									~Tema 1~
+
+	Tema este impartita in 2 fisiere (main.py si compute.py) pentru a usura intelegerea, pe rand, a fiecarui functionalitati din fisier.
+	
+	Am pornit cu implementarea temei de la codul prezentat pe slide-urile de curs:
+
+q = 0
+delta = compute_delta(p)
+for i in range(0, len(t)):
+	q = delta[q][t[i]]
+	if q == len(p):
+		print "Pattern occurs with shift", (i - (len(p) - 1))
+
+p si t reprezinta pattern-ul, respectiv, textul.
+
+
+main.py:
+
+	Am realizat parsarea numelui fisierului de input si al celui de output cu ajutorul bibliotecii sys. In continuare, am avut nevoie de o variabila in care sa retin primele 91 de caractere (doar literele mari ale alfabetului; puteam retine toate literele din alfabet, nr_chars = 256, insa nu a fost nevoie). Apoi, am calculat matricea delta pentru a o parcurge si a vedea ce stari sunt egale cu numarul de caractere din pattern-ul cautat si pentru a returna pozitia unde l-am gasit (pozitia actuala - lungimea pattern-ului). Pentru usurinta afisarii am adaugat intr-un array pozitiile cu apartiile pattern-ului.
+
+
+compute.py:
+	
+	In functia de calcul a matricii delta, compute_delta, am realizat definirea si umplerea matricii cu 0-uri astfel: primul for (cel din interior) imi va crea o lista de 0-uri de lungime nr_chars, iar al doilea imi va multiplica aceasta lista de len(substring) + 1 ori intr-o alta lista. In matrice vor fi introduse valori >= 0 && <= len(substring). 
+
+	Pentru introducerea starilor in matrice, va fi necesara o functie ajutatoare, next_state, pentru a adauga pe pozitia q si i valoarea necesara. Continui deplasarea prin stari daca caracterul este acelasi cu urmatorul caracter din pattern. Voi porni de la cea mai mare valoare si ma opresc cand am gasit presixul (sufixul). (functia ord() imi va intoarce un intreg ce reprezinta codul Unicod-ului)
+	La final, ma intorc in starea 0 daca nu am reusit sa ma deplesez.
